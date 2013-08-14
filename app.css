@@ -1,0 +1,9 @@
+/**
+ * All selectors must have .YOUR_APP_ID as a prefix. 
+ */
+
+.com_your_app_id p.hi {
+	font-weight: bold;
+	font-size: 20px;
+}
+.container.mmp {width:980px;}
