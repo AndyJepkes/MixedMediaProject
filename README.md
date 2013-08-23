@@ -1,4 +1,3 @@
-
 MixedMediaProject
 =================
 
@@ -8,8 +7,10 @@ this project is to provide a fundamental bridge of examples to get from
 the analog collection of data from the physical world to cutting-edge 
 web technologies.
 
+Actions for this project are being tracked here:
+Standby for links to project documents...
 
-This project has examples for (not all added to the repo yet):
+This project has examples for:
 
   1) Arduino:
     1.1) Collect sensor data.
