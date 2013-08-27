@@ -5,7 +5,7 @@
         <link rel="stylesheet" href="http://docs.openf2.org/css/bootstrap.min.2.1.1.css">
     </head>
     <body>
-        <div class="container MixedMediaProject mmp">
+        <div id="MixedMediaProject" class="container MixedMediaProject mmp">
             <div class="hero-unit">
                 <h1>Hello F2</h1>
             </div>
@@ -15,11 +15,12 @@
         <script src="http://code.jquery.com/jquery-latest.js"></script>
         <script src="http://docs.openf2.org/js/bootstrap.js"></script>
         <!--include F2.js-->
-        <script src="http://docs.openf2.org/js/f2.min.js"></script>
-        
+        <script src="F2.min.js"></script>
+
         <!--init & register-->
         <script>
             (function(){
+                console.info(F2.version());
                 //define AppConfigs
                 var _appConfigs = [{
 						appId: "com_markit_dailyactivereport",
@@ -33,22 +34,31 @@
                  * The appRender() method allows for customizing where apps are inserted.
                  * In this example, appRender() would insert apps after the <h1> element.
                  */
-                F2.init({
-                    beforeAppRender: function(app){
-                        var appRoot = '<section class="well span12"></section>';
-                        return $(appRoot).appendTo('div.row');
-                    },
-                    
-                    afterAppRender: function (app, html) {
-                        //app.root is `appShell` from beforeAppRender()
-                        return $(app.root).append(html);
-                    }
+                 
 
-                    //need this temporarily because of #3
-                    //https://github.com/OpenF2/F2/issues/3
-                    ,secureAppPagePath:"foo.html"
-                }); 
-                F2.registerApps(_appConfigs); //pass _appConfigs to initialize apps
+
+
+                var _token = F2.AppHandlers.getToken();
+                F2.init();
+
+                console.info(_token);
+                console.info(F2.Constants.AppHandlers.APP_RENDER);
+
+                F2.AppHandlers.on(
+                    _token, 
+                    F2.Constants.AppHandlers.APP_RENDER, 
+                    document.getElementById('MixedMediaProject')
+                );
+                
+                F2.AppHandlers.on(
+                    _token, 
+                    F2.Constants.AppHandlers.APP_RENDER_AFTER, 
+                    function(){console.info(this);}
+                );
+
+                F2.registerApps(_appConfigs);
+
+
             })();
         </script>
     </body>
